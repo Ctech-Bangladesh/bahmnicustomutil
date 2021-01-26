@@ -9,10 +9,8 @@
  */
 package org.openmrs.module.bahmnicustomutil.api.impl;
 
-import org.openmrs.api.APIException;
 import org.openmrs.api.UserService;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.bahmnicustomutil.Item;
 import org.openmrs.module.bahmnicustomutil.api.BahmnicustomutilService;
 import org.openmrs.module.bahmnicustomutil.api.dao.BahmnicustomutilDao;
 import org.openmrs.module.bahmnicustomutil.model.CustomLocation;
@@ -20,39 +18,18 @@ import org.openmrs.module.bahmnicustomutil.model.CustomLocation;
 import java.util.List;
 
 public class BahmnicustomutilServiceImpl extends BaseOpenmrsService implements BahmnicustomutilService {
-	
+
 	BahmnicustomutilDao dao;
-	
+
 	UserService userService;
-	
+
 	/**
 	 * Injected in moduleApplicationContext.xml
 	 */
 	public void setDao(BahmnicustomutilDao dao) {
 		this.dao = dao;
 	}
-	
-	/**
-	 * Injected in moduleApplicationContext.xml
-	 */
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-	
-	@Override
-	public Item getItemByUuid(String uuid) throws APIException {
-		return dao.getItemByUuid(uuid);
-	}
-	
-	@Override
-	public Item saveItem(Item item) throws APIException {
-		if (item.getOwner() == null) {
-			item.setOwner(userService.getUser(1));
-		}
-		
-		return dao.saveItem(item);
-	}
-	
+
 	@Override
 	public List<CustomLocation> getLocationBylocationTagName(String locationTagName) {
 		return dao.getLocationBylocationTagName(locationTagName);
