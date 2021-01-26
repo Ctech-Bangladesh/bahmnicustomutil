@@ -16,6 +16,7 @@ import org.openmrs.module.bahmnicustomutil.api.dao.BahmnicustomutilDao;
 import org.openmrs.module.bahmnicustomutil.model.CustomLocation;
 
 import java.util.List;
+import java.util.Map;
 
 public class BahmnicustomutilServiceImpl extends BaseOpenmrsService implements BahmnicustomutilService {
 
@@ -33,5 +34,10 @@ public class BahmnicustomutilServiceImpl extends BaseOpenmrsService implements B
 	@Override
 	public List<CustomLocation> getLocationBylocationTagName(String locationTagName) {
 		return dao.getLocationBylocationTagName(locationTagName);
+	}
+
+	@Override
+	public Map<String, Object> getPoorPatientData() {
+		return dao.getPoorPatientData();
 	}
 }

@@ -17,11 +17,9 @@ public class AdminList extends AdministrationSectionExt {
 	}
 
 	public Map<String, String> getLinks() {
-
 		Map<String, String> map = new HashMap<String, String>();
-
-		map.put("module/bahmnicustomutil/greeting.form", "bahmnicustomutil.title");
-
+		map.put("module/bahmnicustomutil/greeting.form", "BAHMNI Custom Module");
+		map.put("module/bahmnicustomutil/totalRegistration/poorPatient.form", "Poor Patients Count");
 		return map;
 	}
 
