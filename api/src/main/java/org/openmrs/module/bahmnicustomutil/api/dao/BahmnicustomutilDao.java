@@ -2,11 +2,9 @@ package org.openmrs.module.bahmnicustomutil.api.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.SQLQuery;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-import org.openmrs.api.db.hibernate.DbSession;
-import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.openmrs.module.bahmnicustomutil.model.CustomLocation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,14 +12,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository("bahmnicustomutil.BahmnicustomutilDao")
+@Repository("bahmnicustomutilDao")
 public class BahmnicustomutilDao {
 
-	@Autowired
-	DbSessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
-	private DbSession getSession() {
-		return sessionFactory.getCurrentSession();
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
 	}
 
 	public List<CustomLocation> getLocationBylocationTagName(String locationTagName) {
@@ -42,8 +39,8 @@ public class BahmnicustomutilDao {
 				+ " (select cv.concept_id from concept_view cv where concept_full_name = 'Poor Patient')"
 				+ " and cast(o.obs_datetime as DATE) between cast(now() as DATE) and cast(now() as DATE)"
 				+ " group by o.person_id) obs_value";
-		SQLQuery criteria1 = getSession().createSQLQuery(query1);
-		SQLQuery criteria2 = getSession().createSQLQuery(query2);
+		SQLQuery criteria1 = sessionFactory.getCurrentSession().createSQLQuery(query1);
+		SQLQuery criteria2 = sessionFactory.getCurrentSession().createSQLQuery(query2);
 		Map<String, Object> obj = new LinkedHashMap<String, Object>();
 		obj.put("totalPatient", criteria1.list());
 		obj.put("poorPatient", criteria2.list());
