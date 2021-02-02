@@ -10,11 +10,8 @@ import java.util.Map;
 
 public class BahmnicustomutilServiceImpl extends BaseOpenmrsService implements BahmnicustomutilService {
 
-	BahmnicustomutilDao bahmnicustomutilDao;
+	private BahmnicustomutilDao bahmnicustomutilDao;
 
-	/**
-	 * Injected in moduleApplicationContext.xml
-	 */
 	public void setBahmnicustomutilDao(BahmnicustomutilDao bahmnicustomutilDao) {
 		this.bahmnicustomutilDao = bahmnicustomutilDao;
 	}
